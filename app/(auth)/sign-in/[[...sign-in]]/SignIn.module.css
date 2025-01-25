@@ -1,0 +1,54 @@
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-color: #181818; /* Dark background */
+    background-image: url('/path/to/your/background-image.jpg'); /* Optional background image */
+    background-size: cover;
+    background-position: center;
+  }
+  
+  .clerk-form {
+    background-color: #282828; /* Darker background for the form */
+    padding: 40px;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  }
+  
+  .clerk-form h2 {
+    color: #fff;
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  
+  .clerk-button {
+    background-color: #4CAF50; /* Green button */
+    color: #fff;
+    border: none;
+    padding: 12px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .clerk-button:hover {
+    background-color: #45a049;
+  }
+  
+  .clerk-text-link {
+    color: #4CAF50; /* Green link color */
+  }
+  
+  .clerk-provider-button {
+    background-color: #4285F4; /* Google button color */
+    color: #fff;
+    border: none;
+    padding: 12px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-bottom: 15px;
+  }
+  
+  .clerk-provider-button:hover {
+    background-color: #357ae8;
+  }
