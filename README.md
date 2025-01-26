@@ -25,7 +25,7 @@ The goal of this project is to demonstrate how to build simple but valuable SaaS
 
 ## Screenshots
 
-### Home Page
+### Video Transformation
 
 ![image](https://github.com/user-attachments/assets/531957c0-fc7a-4cc1-a40e-5dbb7bbe1f73)
 
