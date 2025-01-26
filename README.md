@@ -23,6 +23,22 @@ The goal of this project is to demonstrate how to build simple but valuable SaaS
 - **Prisma**: ORM for database management.
 - **TailwindCSS & DaisyUI**: For responsive, customizable UI components.
 
+## Screenshots
+
+### Home Page
+![image](https://github.com/user-attachments/assets/531957c0-fc7a-4cc1-a40e-5dbb7bbe1f73)
+
+### Image Transformation
+![image](https://github.com/user-attachments/assets/f12c0acd-25f1-43d1-9a59-aea89bb79a5f)
+
+![image](https://github.com/user-attachments/assets/e2bb65d9-dccb-45af-a4a3-784b79f4ccaf)
+
+### Sign-In
+![image](https://github.com/user-attachments/assets/69c26460-17bf-4d02-b1e9-50ea730762a7)
+
+### Upload Video
+![image](https://github.com/user-attachments/assets/b57fc63b-b1bf-4e3c-b019-b6ad6f4dca87)
+
 ## Project Setup
 
 ### Prerequisites
@@ -123,14 +139,3 @@ Contributions are welcome! If you'd like to contribute, please fork the reposito
 ## License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
-## Credits
-
-- **Hitesh Choudhary** - Original tutorial source.
-- **Cloudinary** - For providing excellent media management tools.
-- **Clerk** - For user authentication services.
-
----
-
-Thank you for checking out the **Cloudinary SaaS** project! Happy coding! 🚀
-```
