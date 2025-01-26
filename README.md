@@ -1,6 +1,3 @@
-Here’s the unified `README.md` file for your project:
-
-```markdown
 # Cloudinary SaaS Application
 
 ## Overview
@@ -137,5 +134,3 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 Thank you for checking out the **Cloudinary SaaS** project! Happy coding! 🚀
 ```
-
-This unified `README.md` now combines the project overview, setup instructions, and key features along with the specific tutorial and tech stack details you provided. It is ready for your GitHub repository!
