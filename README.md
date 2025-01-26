@@ -26,17 +26,22 @@ The goal of this project is to demonstrate how to build simple but valuable SaaS
 ## Screenshots
 
 ### Home Page
+
 ![image](https://github.com/user-attachments/assets/531957c0-fc7a-4cc1-a40e-5dbb7bbe1f73)
 
 ### Image Transformation
+
 ![image](https://github.com/user-attachments/assets/f12c0acd-25f1-43d1-9a59-aea89bb79a5f)
+
 
 ![image](https://github.com/user-attachments/assets/e2bb65d9-dccb-45af-a4a3-784b79f4ccaf)
 
 ### Sign-In
+
 ![image](https://github.com/user-attachments/assets/69c26460-17bf-4d02-b1e9-50ea730762a7)
 
 ### Upload Video
+
 ![image](https://github.com/user-attachments/assets/b57fc63b-b1bf-4e3c-b019-b6ad6f4dca87)
 
 ## Project Setup
