@@ -2,145 +2,109 @@
 
 ## Overview
 
-In this project, we are building a powerful **AI-powered SaaS application** using **Next.js** and **Cloudinary**. This application will allow users to upload and transform videos and images using AI-powered media management features, such as resizing images, compressing videos, and selecting key frames. We'll also integrate **user authentication** and design a smooth **UX/UI** to ensure a seamless experience.
+An **AI-driven SaaS platform** built with **Next.js**, **Cloudinary**, and **TypeScript** that empowers users to upload and transform media for social sharing. It supports **image resizing**, **video compression**, **key frame extraction**, and **AI-generated captions** using Hugging Face. With **secure authentication via Clerk** and a polished UI built with **TailwindCSS**, this project showcases modern full-stack and AI-first product development.
 
-The goal of this project is to demonstrate how to build simple but valuable SaaS applications that integrate AI, Cloudinary for media management, and modern technologies like React and Node.js.
+## ✨ Features
 
-## Features
+- 🎥 **Video compression** with automatic optimization  
+- 🖼️ **Image resizing and formatting** for social platforms  
+- 🧠 **AI-powered caption generation** using Hugging Face LLMs  
+- 📸 **Key frame extraction** for video highlight thumbnails  
+- ☁️ **Cloudinary integration** for efficient media management  
+- 🔐 **Clerk authentication** for secure sign-up/login  
+- 🎨 **Responsive UI** using TailwindCSS and DaisyUI  
+- ⚙️ **Clean architecture** with TypeScript, Prisma, and ESLint
 
-- **AI-powered media transformations**: Resize, compress, and optimize images and videos.
-- **Cloudinary integration**: Efficient media management, leveraging Cloudinary's capabilities for compression and transformation.
-- **User authentication**: Secure sign-ups and logins using **Clerk**.
-- **Simple yet scalable UI**: Using **TailwindCSS** for responsive and user-friendly design.
-- **TypeScript & ESLint**: Ensuring a clean and maintainable codebase.
+## 🛠️ Tech Stack
 
-## Key Technologies
+| Category       | Tools Used                                                                 |
+|----------------|----------------------------------------------------------------------------|
+| Frontend       | Next.js, React, TypeScript, TailwindCSS, DaisyUI                          |
+| Media Services | Cloudinary (image & video transformation)                                 |
+| AI/LLM         | Hugging Face Inference API for auto-captioning                            |
+| Auth           | Clerk (OAuth-ready secure authentication)                                 |
+| ORM/DB         | Prisma ORM with PostgreSQL                                                 |
+| Dev Tools      | ESLint, Prettier, NPM, GitHub                                              |
 
-- **Next.js**: Framework for building server-side rendered React applications.
-- **Cloudinary**: Cloud media management for image and video uploading, transformation, and optimization.
-- **AI Integration**: Using AI to transform and enhance media, like selecting significant video frames and context-aware image resizing.
-- **Clerk**: Authentication and user management.
-- **Prisma**: ORM for database management.
-- **TailwindCSS & DaisyUI**: For responsive, customizable UI components.
+## 📸 Screenshots
 
-## Screenshots
-
-### Video Transformation
-
+### Video Transformation  
 ![image](https://github.com/user-attachments/assets/531957c0-fc7a-4cc1-a40e-5dbb7bbe1f73)
 
-### Image Transformation
-
-![image](https://github.com/user-attachments/assets/f12c0acd-25f1-43d1-9a59-aea89bb79a5f)
-
-
+### Image Transformation  
+![image](https://github.com/user-attachments/assets/f12c0acd-25f1-43d1-9a59-aea89bb79a5f)  
 ![image](https://github.com/user-attachments/assets/e2bb65d9-dccb-45af-a4a3-784b79f4ccaf)
 
-### Sign-In
-
+### Sign-In  
 ![image](https://github.com/user-attachments/assets/69c26460-17bf-4d02-b1e9-50ea730762a7)
 
-### Upload Video
-
+### Upload Video  
 ![image](https://github.com/user-attachments/assets/b57fc63b-b1bf-4e3c-b019-b6ad6f4dca87)
 
-## Project Setup
+## 🚀 Getting Started
 
 ### Prerequisites
 
-Ensure that you have the following installed on your local machine:
+Make sure you have:
 
-- **Node.js** (v14 or higher)
-- **npm** (or **yarn**)
+- **Node.js** (v14+)
+- **npm** or **yarn**
 
 ### Installation
 
-1. Clone the repository:
+```bash
+git clone https://github.com/<your-username>/cloudinary-saas.git
+cd cloudinary-saas
+npm install
+```
 
-   ```bash
-   git clone https://github.com/<your-username>/cloudinary-saas.git
-   cd cloudinary-saas
-   ```
+### Environment Setup
 
-2. Install dependencies:
+Create a `.env.local` file and add:
 
-   ```bash
-   npm install
-   ```
+```env
+NEXT_PUBLIC_CLOUDINARY_URL=<your-cloudinary-url>
+CLERK_FRONTEND_API=<your-clerk-frontend-api>
+CLERK_API_KEY=<your-clerk-api-key>
+DATABASE_URL=<your-prisma-database-url>
+```
 
-3. Set up environment variables:
+### Run Locally
 
-   Create a `.env.local` file in the root of the project and add the following environment variables:
+```bash
+npm run dev
+```
 
-   ```env
-   NEXT_PUBLIC_CLOUDINARY_URL=<your-cloudinary-url>
-   CLERK_FRONTEND_API=<your-clerk-frontend-api>
-   CLERK_API_KEY=<your-clerk-api-key>
-   DATABASE_URL=<your-prisma-database-url>
-   ```
+Open [http://localhost:3000](http://localhost:3000)
 
-4. Run the development server:
+## 🧠 AI Features
 
-   ```bash
-   npm run dev
-   ```
+- **Image Captioning**: Auto-caption generation via Hugging Face LLMs  
+- **Video Key Frame Extraction**: Highlights key visuals from video uploads  
+- **Content Optimization**: Smart resizing/compression based on format presets  
 
-5. Open your browser and go to `http://localhost:3000` to see the application in action.
+These features elevate the user experience and demonstrate real-world use of modern AI/LLM APIs.
 
-### Available Scripts
-
-- **dev**: Starts the development server in watch mode.
-
-  ```bash
-  npm run dev
-  ```
-
-- **build**: Builds the project for production.
-
-  ```bash
-  npm run build
-  ```
-
-- **start**: Starts the production server after building.
-
-  ```bash
-  npm run start
-  ```
-
-- **lint**: Lints the project files for code quality.
-
-  ```bash
-  npm run lint
-  ```
-
-## Project Structure
+## 🧾 Project Structure
 
 ```
 .
-├── components/         # React components for UI elements
-├── lib/                # Utility functions
-├── pages/              # Next.js pages for routing
-├── prisma/             # Prisma ORM and database management
-├── public/             # Public assets (images, etc.)
-├── styles/             # Global styles (TailwindCSS)
-└── .env.local          # Local environment variables
+├── components/         # UI components
+├── lib/                # Utilities and helpers
+├── pages/              # Next.js routes
+├── prisma/             # Database schemas
+├── public/             # Static assets
+├── styles/             # Tailwind config
+└── .env.local          # Environment variables
 ```
 
-## AI Features
+## 🤝 Contributing
 
-The AI-powered features in this application are integrated using **Cloudinary's AI capabilities**. Some of the key transformations include:
+Contributions are welcome! Fork the repo, make your changes, and submit a pull request.
 
-- **Automatic image resizing**: Based on user preferences and format.
-- **Video compression**: To reduce file size while retaining quality.
-- **Key frame extraction**: To highlight the most important parts of videos.
+- Report bugs via GitHub Issues  
+- Suggest new AI or transformation features
 
-## Contributing
+## 📄 License
 
-Contributions are welcome! If you'd like to contribute, please fork the repository and submit a pull request with your changes.
-
-- **Bug fixes**: If you encounter a bug, please report it by opening an issue.
-- **Feature requests**: If you have an idea for a new feature, feel free to submit it for consideration.
-
-## License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+Licensed under the MIT License. See [LICENSE](LICENSE).
