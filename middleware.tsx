@@ -8,7 +8,13 @@ const isPublicRoute = createRouteMatcher([
   '/home',
 ]);
 
-const isPublicAPIRoute = createRouteMatcher(['/api/videos']);
+const isPublicAPIRoute = createRouteMatcher([
+  '/api/videos',
+  '/api/caption-generator', // ✅ Add it here instead
+  '/api/debug', // ✅ Add it here instead
+    '/api/generate-tags' // ✅ Add this!
+
+]);
 
 export default clerkMiddleware(async (auth, req) => {
   const { userId } = await auth(); // Await the auth() call to resolve the promise

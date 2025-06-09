@@ -1,54 +1,73 @@
+// app/api/image-upload/route.ts
 import { v2 as cloudinary } from 'cloudinary';
-import { NextRequest,NextResponse } from 'next/server';
-import {auth} from '@clerk/nextjs/server'
+import { NextRequest, NextResponse } from 'next/server';
+import { auth } from '@clerk/nextjs/server';
 
-   // Configuration
-   cloudinary.config({ 
-    cloud_name: process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME, 
-    api_key: process.env.CLOUDINARY_API_KEY, 
-    api_secret: process.env.CLOUDINARY_API_SECRET // Click 'View API Keys' above to copy your API secret
+// ✅ Better to configure once and reuse from a utility file
+cloudinary.config({
+  cloud_name: process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME!,
+  api_key: process.env.CLOUDINARY_API_KEY!,
+  api_secret: process.env.CLOUDINARY_API_SECRET!,
+  secure: true, // ✅ enforce HTTPS
 });
 
 interface CloudinaryUploadResult {
-    public_id:string;
-    [key: string]:any
+  public_id: string;
+  secure_url: string;
+  [key: string]: any;
 }
 
-export async function POST(request: NextRequest){
-    const {userId} = await auth()
+export async function POST(request: NextRequest) {
+  const { userId } = await auth();
 
-    if(!userId){
-        return NextResponse.json({error:"Unauthorized"},{status:401})
+  if (!userId) {
+    return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+  }
+
+  try {
+    const formData = await request.formData();
+    const file = formData.get('file') as File | null;
+
+    if (!file) {
+      return NextResponse.json({ error: 'File not found' }, { status: 400 });
     }
 
-    try{
-        const formData = await request.formData();
-        const file = formData.get('file') as File | null
+    const bytes = await file.arrayBuffer();
+    const buffer = Buffer.from(bytes);
 
-        if(!file)
-            return NextResponse.json({error:"file not found"},{status:400})
+    // ✅ Wrap upload in Promise
+    const result = await new Promise<CloudinaryUploadResult>((resolve, reject) => {
+      cloudinary.uploader.upload_stream(
+      {
+          folder: 'next-cloudinary-uploads',
+          resource_type: 'image',
+          use_filename: false,
+          unique_filename: true,
+          overwrite: false,
+          transformation: [
+            { quality: 'auto:good', fetch_format: 'auto' },
+          ],
+        },
 
-        const bytes = await file.arrayBuffer()
-        const buffer = Buffer.from(bytes)
+        (error, result) => {
+          if (error || !result) {
+            reject(error || new Error('Upload failed'));
+          } else {
+            resolve(result as CloudinaryUploadResult);
+          }
+        }
+      ).end(buffer);
+    });
 
-        const result = await new Promise<CloudinaryUploadResult>(
-            (resolve,reject) => {
-                const upload_stream = cloudinary.uploader.upload_stream(
-                    {folder:'next-cloudinary-uploads'},
-                    (error,result) => {
-                    if(error) reject(error)
-                    else resolve(result as CloudinaryUploadResult)
-                })
-                upload_stream.end(buffer)
-            }
-        )
-
-        return NextResponse.json({publicId:result.public_id},{status:200})
-    }
-    catch(error){
-        console.log("Upload image failed", error)
-        return NextResponse.json({error:"Upload image failed"},
-            {status:500}
-        )
-    }
+    return NextResponse.json(
+      {
+        publicId: result.public_id,
+        url: result.secure_url,
+      },
+      { status: 200 }
+    );
+  } catch (error) {
+    console.error('❌ Upload image failed:', error);
+    return NextResponse.json({ error: 'Upload image failed' }, { status: 500 });
+  }
 }

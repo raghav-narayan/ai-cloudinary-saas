@@ -6,15 +6,14 @@ services:
     volumes:
       - ./data/db:/var/lib/postgresql/data
     ports:
-      - 5432:5432  # make sure you don't have another container running on 5432
-
+      - "5433:5432"  # 👈 host:container — avoid conflict with native Postgres
     environment:
       - POSTGRES_DB=chaiDB
-      - POSTGRES_USER=chaiaurcode
-      - POSTGRES_PASSWORD=chaiaurcode
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
 
   adminer:
     image: adminer
     restart: always
     ports:
-      - 8080:8080
+      - "8085:8080"
