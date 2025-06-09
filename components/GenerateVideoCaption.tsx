@@ -1,5 +1,6 @@
 'use client';
-import { useEffect, useState } from 'react';
+
+import { useState, useEffect } from 'react';
 
 interface Props {
   videoTitle: string;
@@ -26,6 +27,8 @@ export default function GenerateVideoCaption({
   const [saved, setSaved] = useState(false);
   const [editing, setEditing] = useState(false);
   const [tone, setTone] = useState('fun');
+  const [refining, setRefining] = useState(false);
+  const [refinement, setRefinement] = useState('More Engaging');
   const [error, setError] = useState('');
 
   useEffect(() => {
@@ -54,23 +57,34 @@ export default function GenerateVideoCaption({
         setError(data.error || 'Caption generation failed.');
       }
     } catch (err) {
-      console.error('❌ Generate error:', err);
       setError('Something went wrong.');
     } finally {
       setLoading(false);
     }
   };
 
-  const handleCopy = () => {
-    navigator.clipboard.writeText(caption);
-    setCopied(true);
-    setTimeout(() => setCopied(false), 2000);
-  };
+  const handleRefine = async () => {
+    setRefining(true);
+    setError('');
+    try {
+      const res = await fetch('/api/refine-caption', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ caption, refinement }),
+      });
 
-  const handleCopyTags = () => {
-    navigator.clipboard.writeText(hashtags.map(tag => `#${tag}`).join(' '));
-    setCopiedTags(true);
-    setTimeout(() => setCopiedTags(false), 2000);
+      const data = await res.json();
+      if (res.ok && data.refined?.trim()) {
+        setCaption(data.refined.trim());
+        setEditing(false);
+      } else {
+        setError('No meaningful refinement returned.');
+      }
+    } catch (err) {
+      setError('Something went wrong during refinement.');
+    } finally {
+      setRefining(false);
+    }
   };
 
   const handleSave = async () => {
@@ -90,101 +104,129 @@ export default function GenerateVideoCaption({
     }
   };
 
+  const handleCopy = () => {
+    navigator.clipboard.writeText(caption);
+    setCopied(true);
+    setTimeout(() => setCopied(false), 2000);
+  };
+
+  const handleCopyTags = () => {
+    navigator.clipboard.writeText(hashtags.map((tag) => `#${tag}`).join(' '));
+    setCopiedTags(true);
+    setTimeout(() => setCopiedTags(false), 2000);
+  };
+
   return (
-    <div className="mt-4 bg-base-200 border border-base-300 rounded-xl p-4 shadow-md transition-all duration-300">
-      {/* Top Controls */}
-      <div className="flex flex-wrap items-center gap-3 mb-2">
-        <select
-          className="select select-sm w-auto bg-base-100 border border-base-300 text-base-content"
-          value={tone}
-          onChange={(e) => setTone(e.target.value)}
-        >
-          <option value="fun">Friendly</option>
-          <option value="formal">Formal</option>
-          <option value="chill">Relaxed</option>
-          <option value="descriptive">Detailed</option>
-        </select>
+    <div className="space-y-6 text-base-content">
+      {/* Generate Caption Section */}
+      <section>
+        <p className="text-sm font-bold mb-1">🎬 Generate Caption + Hashtags</p>
+        <p className="text-xs text-muted-content mb-2">
+          Uses video title, tone, and thumbnail to generate a fresh caption and tags.
+        </p>
+        <div className="flex flex-wrap gap-2 items-center">
+          <select
+            className="select select-sm bg-base-100 border-base-300"
+            value={tone}
+            onChange={(e) => setTone(e.target.value)}
+          >
+            <option value="fun">Fun</option>
+            <option value="formal">Formal</option>
+            <option value="chill">Relaxed</option>
+            <option value="descriptive">Descriptive</option>
+          </select>
+          <button
+            className="btn btn-sm btn-primary"
+            onClick={handleGenerate}
+            disabled={loading}
+          >
+            {loading ? 'Generating...' : 'Generate Caption + Hashtags'}
+          </button>
+        </div>
+      </section>
 
-        <button
-          className="btn btn-sm btn-primary"
-          onClick={handleGenerate}
-          disabled={loading}
-        >
-          {loading ? 'Generating...' : 'Generate Caption'}
-        </button>
+      {/* Refine Caption Section */}
+      <section>
+        <p className="text-sm font-bold mb-1">🛠 Refine Caption</p>
+        <p className="text-xs text-muted-content mb-2">
+          Improve the current caption for SEO, clarity, or tone. Hashtags will not be changed.
+        </p>
+        <div className="flex flex-wrap gap-2 items-center">
+          <select
+            className="select select-xs bg-base-100 border-base-300"
+            value={refinement}
+            onChange={(e) => setRefinement(e.target.value)}
+          >
+            <option value="More Engaging">More Engaging</option>
+            <option value="Shorter">Shorter</option>
+            <option value="More Descriptive">More Descriptive</option>
+            <option value="SEO Optimized">SEO Optimized</option>
+          </select>
+          <button
+            className="btn btn-xs btn-secondary"
+            onClick={handleRefine}
+            disabled={refining}
+          >
+            {refining ? 'Refining...' : '✨ Refine Caption'}
+          </button>
+        </div>
+      </section>
 
-        {caption && (
-          <span className="text-green-500 text-xs ml-auto font-medium">
-            Caption ready
-          </span>
-        )}
-      </div>
-
-      {/* Error message */}
-      {error && <p className="text-red-500 text-sm mt-2">{error}</p>}
-
-      {/* Caption Display */}
+      {/* Output Section */}
       {caption && (
-        <div className="mt-3">
-          {editing ? (
-            <textarea
-              className="w-full p-2 rounded-md bg-base-100 text-base-content border border-base-300 resize-none text-sm"
-              rows={4}
-              value={caption}
-              onChange={(e) => setCaption(e.target.value)}
-            />
-          ) : (
-            <div className="bg-base-100 p-3 rounded-md border border-base-300 text-sm text-base-content whitespace-pre-wrap max-h-[160px] overflow-auto leading-relaxed">
-              {caption}
-            </div>
-          )}
-
-          {/* Hashtag Display */}
-          {hashtags.length > 0 && (
-            <div className="flex flex-wrap gap-2 mt-3 text-sm">
-              {hashtags.map((tag, idx) => (
-                <span
-                  key={idx}
-                  className="badge badge-outline bg-base-100 border-base-300 text-xs font-medium"
-                >
-                  #{tag}
-                </span>
-              ))}
-            </div>
-          )}
-
-          {/* Actions */}
-          <div className="flex flex-wrap gap-3 mt-4">
-            {!editing ? (
+        <section className="space-y-2">
+          <p className="text-sm font-bold mb-1">📄 Caption</p>
+          <div className="bg-base-100 border border-base-300 p-4 rounded-md text-sm whitespace-pre-wrap leading-relaxed transition-all min-h-[64px]">
+            {editing ? (
+              <textarea
+                value={caption}
+                onChange={(e) => setCaption(e.target.value)}
+                className="textarea textarea-sm w-full bg-base-100 text-base-content"
+                rows={4}
+              />
+            ) : (
+              caption
+            )}
+          </div>
+          <div className="flex flex-wrap gap-2 justify-end">
+            {editing ? (
+              <button className="btn btn-xs btn-success" onClick={handleSave}>
+                {saved ? '✔ Saved' : 'Save'}
+              </button>
+            ) : (
               <button className="btn btn-xs btn-accent" onClick={() => setEditing(true)}>
                 Edit
               </button>
-            ) : (
-              <button className="btn btn-xs btn-accent" onClick={handleSave}>
-                Save
-              </button>
             )}
-
-            <button
-              className="btn btn-xs btn-outline btn-secondary"
-              onClick={handleCopy}
-            >
+            <button className="btn btn-xs btn-outline btn-primary" onClick={handleCopy}>
               {copied ? 'Copied' : 'Copy Caption'}
             </button>
-
-            {hashtags.length > 0 && (
-              <button
-                className="btn btn-xs btn-outline btn-secondary"
-                onClick={handleCopyTags}
-              >
-                {copiedTags ? 'Tags Copied' : 'Copy Hashtags'}
-              </button>
-            )}
-
-            {saved && <span className="text-green-400 text-xs font-medium">Saved</span>}
           </div>
-        </div>
+        </section>
       )}
+
+      {hashtags.length > 0 && (
+        <section className="space-y-1">
+          <p className="text-sm font-bold">🏷️ Hashtags</p>
+          <div className="flex flex-wrap gap-2">
+            {hashtags.map((tag, idx) => (
+              <span
+                key={idx}
+                className="badge bg-base-200 border-base-300 text-xs px-2 py-1 font-medium rounded-md"
+              >
+                #{tag}
+              </span>
+            ))}
+          </div>
+          <div className="flex justify-end">
+            <button className="btn btn-xs btn-outline btn-primary" onClick={handleCopyTags}>
+              {copiedTags ? 'Tags Copied' : 'Copy Hashtags'}
+            </button>
+          </div>
+        </section>
+      )}
+
+      {error && <p className="text-xs text-red-500 mt-2">{error}</p>}
     </div>
   );
 }

@@ -84,104 +84,102 @@ export default function SocialShare() {
     }
   };
 
-return (
-  <div className="container mx-auto p-6 max-w-[1200px]">
-    <h1 className="text-3xl font-bold mb-8 text-center">📱 Social Media Image Creator</h1>
+  return (
+    <div className="container mx-auto p-6 max-w-[1200px]">
+     <div className="mb-8">
+  <h1 className="text-4xl font-bold text-white">Social Media Image Creator</h1>
+  <p className="mt-2 text-sm text-gray-400 max-w-2xl">
+    For each uploaded image, you can <span className="text-primary font-medium">generate an AI caption</span>,
+    <span className="text-primary font-medium"> auto-create hashtags</span>, and
+    <span className="text-primary font-medium"> download the post-ready format</span> for your favorite platform.
+  </p>
+</div>
 
-    <div className="card bg-base-100 shadow-xl">
-      <div className="card-body space-y-6">
-        <Uploader onUpload={handleFileUpload} isUploading={isUploading} />
+      <div className="card bg-base-100 shadow-xl">
+        <div className="card-body space-y-6">
+          <Uploader onUpload={handleFileUpload} isUploading={isUploading} />
 
-        {uploadedImage && (
-          <>
-            <FormatSelector
-              selected={selectedFormat}
-              onChange={(val) => setSelectedFormat(val as SocialFormat)}
-              formats={Object.keys(socialFormats)}
-            />
+          {uploadedImage && (
+            <>
+              <FormatSelector
+                selected={selectedFormat}
+                onChange={(val) => setSelectedFormat(val as SocialFormat)}
+                formats={Object.keys(socialFormats)}
+              />
 
-            {/* Full-width Image Preview */}
-            <ImagePreview
-              uploadedImage={uploadedImage}
-              selectedFormat={selectedFormat}
-              isTransforming={isTransforming}
-              setIsTransforming={setIsTransforming}
-              formats={socialFormats}
-            />
+              <ImagePreview
+                uploadedImage={uploadedImage}
+                selectedFormat={selectedFormat}
+                isTransforming={isTransforming}
+                setIsTransforming={setIsTransforming}
+                formats={socialFormats}
+              />
 
-            {/* Action + AI Output Section */}
-            <div className="mt-8 space-y-6">
+              <div className="mt-8 space-y-6">
+                <div className="flex flex-col sm:flex-row justify-center gap-4">
+                  <button
+                    className="btn btn-primary transition-transform hover:-translate-y-1 duration-200"
+                    onClick={generateAIContent}
+                  >
+                    🤖 Generate Caption + Hashtags
+                  </button>
 
-              {/* Buttons */}
-              <div className="flex flex-col sm:flex-row justify-center gap-4">
-                <button
-                  className="btn btn-primary transition-transform hover:-translate-y-1 duration-200"
-                  onClick={generateAIContent}
-                >
-                  🤖 Generate Caption + Hashtags
-                </button>
-
-                <button
-                  className="btn btn-outline btn-accent transition-transform hover:-translate-y-1 duration-200"
-                  onClick={() => {
-                    const anchor = document.createElement('a');
-                    anchor.href = uploadedImageUrl || '';
-                    anchor.download = 'social-image.png';
-                    anchor.click();
-                  }}
-                >
-                  ⬇️ Download for {selectedFormat.split(' ')[0]}
-                </button>
-              </div>
-
-              {/* Loading */}
-              {loadingAI && (
-                <p className="text-sm text-center text-gray-500">Generating AI content...</p>
-              )}
-
-              {/* Caption + Hashtag Output */}
-              {caption && (
-                <div className="flex justify-center">
-                  <div className="bg-base-200 border border-base-300 rounded-xl p-5 shadow-md w-full max-w-2xl transition-shadow hover:shadow-lg">
-                    <p className="text-base font-semibold mb-2">📝 AI Caption</p>
-                    <p className="mb-4 text-sm text-base-content">{caption}</p>
-
-                    <p className="text-base font-semibold mb-2">🏷️ Hashtags</p>
-                    <div className="flex flex-wrap gap-2">
-                      {hashtags.split(',').map((tag, idx) => (
-                        <span
-                          key={idx}
-                          className="badge text-white bg-gradient-to-r from-purple-600 to-pink-500 shadow"
-                        >
-                          #{tag.trim()}
-                        </span>
-                      ))}
-                    </div>
-
-                    {/* Copy Button */}
-                    <button
-                      className="btn btn-sm btn-outline mt-4"
-                      onClick={() =>
-                        navigator.clipboard.writeText(
-                          `${caption}\n\n${hashtags
-                            .split(',')
-                            .map((tag) => `#${tag.trim()}`)
-                            .join(' ')}`
-                        )
-                      }
-                    >
-                      📋 Copy Caption + Hashtags
-                    </button>
-                  </div>
+                  {/* <button
+                    className="btn btn-outline btn-accent transition-transform hover:-translate-y-1 duration-200"
+                    onClick={() => {
+                      const anchor = document.createElement('a');
+                      anchor.href = uploadedImageUrl || '';
+                      anchor.download = 'social-image.png';
+                      anchor.click();
+                    }}
+                  >
+                    ⬇️ Download for {selectedFormat.split(' ')[0]}
+                  </button> */}
                 </div>
-              )}
-            </div>
-          </>
-        )}
+
+                {loadingAI && (
+                  <p className="text-sm text-center text-gray-500">Generating AI content...</p>
+                )}
+
+                {caption && (
+                  <div className="flex justify-center">
+                    <div className="bg-base-200 border border-base-300 rounded-xl p-5 shadow-md w-full max-w-2xl transition-shadow hover:shadow-lg">
+                      <p className="text-base font-semibold mb-2">📝 AI Caption</p>
+                      <p className="mb-4 text-sm text-base-content">{caption}</p>
+
+                      <p className="text-base font-semibold mb-2">🏷️ Hashtags</p>
+                      <div className="flex flex-wrap gap-2">
+                        {hashtags.split(',').map((tag, idx) => (
+                          <span
+                            key={idx}
+                            className="badge text-white bg-gradient-to-r from-purple-600 to-pink-500 shadow"
+                          >
+                            #{tag.trim()}
+                          </span>
+                        ))}
+                      </div>
+
+                      <button
+                        className="btn btn-sm btn-outline mt-4"
+                        onClick={() =>
+                          navigator.clipboard.writeText(
+                            `${caption}\n\n${hashtags
+                              .split(',')
+                              .map((tag) => `#${tag.trim()}`)
+                              .join(' ')}`
+                          )
+                        }
+                      >
+                        📋 Copy Caption + Hashtags
+                      </button>
+                    </div>
+                  </div>
+                )}
+              </div>
+            </>
+          )}
+        </div>
       </div>
     </div>
-  </div>
-);
-
-
+  );
 }

@@ -1,21 +1,28 @@
+'use client';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import {
-  LayoutDashboardIcon,
-  Share2Icon,
-  UploadIcon,
+  VideoIcon,
   ImageIcon,
+  UploadIcon,
   ChevronsLeft,
   ChevronsRight,
+  LayoutDashboardIcon,
 } from 'lucide-react';
 
 const navItems = [
-  { href: '/home', label: 'Dashboard', icon: LayoutDashboardIcon },
-  { href: '/social-share', label: 'Social Share', icon: Share2Icon },
-  { href: '/video-upload', label: 'Upload Media', icon: UploadIcon },
+  { href: '/home', label: 'Video Library', icon: VideoIcon },
+  { href: '/social-share', label: 'Image Captioner', icon: ImageIcon },
+  { href: '/video-upload', label: 'Upload Video', icon: UploadIcon },
 ];
 
-export function Sidebar({ isOpen, toggleOpen }: { isOpen: boolean; toggleOpen: () => void }) {
+export function Sidebar({
+  isOpen,
+  toggleOpen,
+}: {
+  isOpen: boolean;
+  toggleOpen: () => void;
+}) {
   const pathname = usePathname();
 
   return (
@@ -24,6 +31,7 @@ export function Sidebar({ isOpen, toggleOpen }: { isOpen: boolean; toggleOpen: (
         isOpen ? 'w-64' : 'w-16'
       }`}
     >
+      {/* Logo + Toggle */}
       <div className="flex items-center justify-between px-4 py-6">
         <div className="flex items-center gap-2">
           <ImageIcon className="w-6 h-6 text-primary" />
@@ -34,6 +42,14 @@ export function Sidebar({ isOpen, toggleOpen }: { isOpen: boolean; toggleOpen: (
         </button>
       </div>
 
+      {/* Optional Section Label */}
+      {isOpen && (
+        <div className="px-4 py-2 text-xs font-semibold text-base-content/70 uppercase tracking-widest">
+          Navigation
+        </div>
+      )}
+
+      {/* Navigation Links */}
       <ul className="menu px-2 flex-grow">
         {navItems.map(({ href, label, icon: Icon }) => (
           <li key={href} title={isOpen ? '' : label}>
