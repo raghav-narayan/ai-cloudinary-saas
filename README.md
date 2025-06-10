@@ -1,115 +1,119 @@
+# AuraCast 🎥📸
 
-# AuraCast 🎬✨  
-**AI-Powered Media Toolkit for Content Creators & Animators**
-
-> _“Whether it’s Goku’s first transformation or your latest animation clip—capture it, caption it, and share it.”_
-
-AuraCast is a full-stack AI-powered media platform that helps creators extract iconic video frames, generate viral-ready captions, and compress media intelligently. Built with cutting-edge tools like Cloudinary and Gemini LLMs, AuraCast combines visual fidelity with AI automation to streamline content generation.
+**Intelligent media management platform** enabling creators to upload videos, extract key frames, compress media, generate captions, hashtags, and ready-to-share thumbnails — all powered by Cloudinary and LLMs.
 
 ---
 
-## 🔍 Core Features
+## 🚀 Features
 
-### 🧠 AI Caption + Hashtag Generator
-- Uses Gemini 1.5 Flash to generate engaging captions & hashtags
-- Context-aware: inputs include title, description, duration & even thumbnail
-- Supports tone variations: Fun, Formal, SEO-Optimized, More Engaging, etc.
+- **Video Upload & Compression**  
+  Upload videos, get them optimized and compressed via Cloudinary.
+- **Key‑Frame Extraction**  
+  Automatically extract visually compelling frames with Cloudinary AI.
+- **Thumbnail Selection Tool**  
+  Interactive slider + preview modal to pick the perfect thumbnail.
+- **AI‑Powered Caption & Hashtag Generation**  
+  Generate or refine captions and hashtags using video metadata and context.
+- **Image Formatter**  
+  Resize images for various social platforms (Twitter, LinkedIn, etc.).
 
-### 🎞️ Keyframe Thumbnail Picker
-- Powered by Cloudinary’s video transformation API  
-- Allows creators to scrub, seek, and **extract precise thumbnails** using an interactive slider  
-- Auto-generates high-resolution, shareable thumbnails
+---
 
-### 📦 AI-Optimized Video Compression
-- **Lossless compression** with real-time before/after stats  
-- Compression percentages shown clearly for each video  
-- Instantly downloadable compressed versions
+## 🎬 Screenshots & Demo
+### Landing Page  
+![image](https://github.com/user-attachments/assets/2455ba11-30f9-4990-a2f1-4269bde81b11)
 
-### 🖼️ Social Media Formatter for Images
-- Format media for Twitter, LinkedIn, Instagram using Cloudinary transformations  
-- Auto-generate post text and hashtags using LLMs  
-- Download share-ready visuals for multiple platforms
+### Upload Flow  
+![image](https://github.com/user-attachments/assets/1c7b2319-6584-44d0-a051-82bf079239d5)
 
-### 🗃️ Personalized Video Library
-- Upload videos and manage a smart library with filters, hover previews, and metadata  
-- Each video includes captioning, keyframe control, and media stats (original vs. compressed size)
+### Video Library - AI Compression and Key Frame Extraction  
+![image](https://github.com/user-attachments/assets/580d470c-36f6-494a-88aa-f5894e188ec8)
+
+### Thumbnail Picker  
+![image](https://github.com/user-attachments/assets/9bc030a8-d45e-45ea-9b44-4aa12ffe3d11)
+
+### Caption & Hashtags Generator with Tone-based Refinement  
+![image](https://github.com/user-attachments/assets/d563bf44-41e2-4065-8bad-87412ee3f024)
+
+### Image Formatter  
+![image](https://github.com/user-attachments/assets/9d5289dd-85bb-4010-a0cd-cf120a62b7e9)
+
+### Caption & Hashtags Generator for Images
+![image](https://github.com/user-attachments/assets/3ff279bd-96eb-404c-bd07-553aea1ba3c5)
+
+### Demo
+https://youtu.be/l5T-Rx35ggQ
 
 ---
 
 ## ⚙️ Tech Stack
 
-| Layer            | Tools / Libraries |
-|------------------|-------------------|
-| **Frontend**     | Next.js (App Router), React, TailwindCSS, DaisyUI |
-| **Backend API**  | Next.js Server Functions (`app/api/`), TypeScript |
-| **AI/LLM**       | **Gemini 1.5 Flash** via Google AI API for captions, tags, refinement |
-| **Cloud Media**  | **Cloudinary** for video hosting, thumbnail generation, compression |
-| **UI Enhancements** | Lucide Icons, Custom Modals, Responsive Layout |
-| **State Mgmt**   | useState, useEffect, useRef — optimized per component |
-| **Deployment**   | Vercel (or local dev with `npm run dev`) |
+| Layer               | Technologies                                                         |
+|--------------------|----------------------------------------------------------------------|
+| **Frontend**        | Next.js 13 (App Router), React, TypeScript, Tailwind CSS, Lucide Icons |
+| **Backend / API**   | Next.js API Routes, Cloudinary (Video/Thumbnail APIs), OpenAI API (LLM) |
+| **Cloud & Storage** | Cloudinary for video/image transforms & key-frame extraction       |
+| **Media Utils**     | `filesize` (JS lib for readable file sizes)                         |
 
 ---
 
-## 🔥 AI + Cloudinary Integration Highlights
+## 🧠 AI & Cloudinary Workflow
 
-| Feature              | Cloudinary       | Gemini (LLM)    |
-|----------------------|------------------|------------------|
-| Keyframe Extraction  | ✅ Precise timestamp thumbnails via `start_offset` |
-| Caption Generation   | Contextual prompts: title, metadata, thumbnail |
-| Hashtag Suggestions  | Hashtags tuned per tone & platform |
-| Compression          | ✅ Real-time video compression & size stats |
-| Image Formatting     | Auto-resize + preview for Twitter, LinkedIn, IG |
+1. **Video Upload** — Send file to backend; store via Cloudinary.
+2. **Compression** — Cloudinary auto-optimizes the video.
+3. **Key‑Frame Extraction** — User-driven slice/slider triggers Cloudinary `start_offset` frame.
+4. **AI Captioning** — LLM uses video metadata (title, thumbnails) to generate SEO-optimized captions & hashtags.
+5. **Downloadable Outputs** — compressed video, thumbnail, captions, and image formats ready for sharing.
 
 ---
 
-## 🚀 Demo
+## 📂 Setup & Local Development
 
-- 📹 [Video Demo – Keyframe & Captioning](https://your-link.com/sample1.mp4)  
-- 🖼️ [Video Demo – Social Media Image Tool](https://your-link.com/sample2.mp4)
-
----
-
-## 🧪 Screenshots
-
-| Video Library | Captioning | Thumbnail Picker |
-|---------------|------------|------------------|
-| ![Library](./screenshots/library.png) | ![Captioner](./screenshots/captioner.png) | ![Thumbnail](./screenshots/thumbnail-modal.png) |
-
-> _Replace the placeholders above with your actual screenshots_
-
----
-
-## 💼 Why It Matters (for Recruiters)
-
-- **End-to-end AI integration** using real LLM APIs (Gemini 1.5 Flash)  
-- **Cloud-native media operations** — no fake mocks; real Cloudinary usage  
-- **Strong UI/UX thinking**: clean design, clear controls, hover states, previews  
-- **Built for creators, usable by marketers**: emphasizes AI that serves storytelling  
-- Designed and implemented 100% independently as a **solo full-stack engineer**
+1. Clone & install:
+   ```bash
+   git clone https://github.com/your-username/ai-cloudinary-saas.git
+   cd ai-cloudinary-saas
+   npm install
+   ```
+2. Add `.env.local` with:
+   ```
+   NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME=...
+   CLOUDINARY_API_KEY=...
+   CLOUDINARY_API_SECRET=...
+   OPENAI_API_KEY=...
+   ```
+3. Run the dev server:
+   ```bash
+   npm run dev
+   ```
+4. Navigate to: `http://localhost:3000`
 
 ---
 
-## 🧑‍💻 Run It Locally
+## 📍 Usage
 
-```bash
-git clone https://github.com/your-username/auracast.git
-cd auracast
-npm install
-npm run dev
-```
-
-### 🌐 Environment Variables
-
-```env
-NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME=your_cloud_name
-CLOUDINARY_API_KEY=your_api_key
-CLOUDINARY_API_SECRET=your_api_secret
-GEMINI_API_KEY=your_google_ai_key
-```
+- **Upload** a short video clip (~<70 MB).
+- **Browse** your library with auto-compressed previews.
+- **Pick** a timestamp using the modal slider → extract a frame.
+- **Generate** caption + hashtags — copy & paste anywhere.
 
 ---
 
-## 📫 Contact
+## 🎯 Use Cases
 
-Built with care by [**Raghav Narayan**](https://linkedin.com/in/raghav-narayan)  
-🔗 [Portfolio](https://your-portfolio-link.com) | ✉️ raghav.narayan.98@gmail.com
+- Content creators & animators capturing viral moment thumbnails
+- Social media marketers preparing post-ready assets
+- Developers exploring Cloudinary integrations and LLM workflows
+
+---
+
+## 🤝 Get Involved
+
+Contributions and feedback are welcome!  
+Connect with me: **raghav.narayan.98@gmail.com**
+
+---
+
+## 🔖 License
+
+This repo is shared under the **MIT License**.
