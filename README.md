@@ -1,40 +1,98 @@
-<<<<<<< HEAD
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+AuraCast 🎬✨
+AI-Powered Media Toolkit for Content Creators & Animators
 
-## Getting Started
+“Whether it’s Goku’s first transformation or your latest animation clip—capture it, caption it, and share it.”
 
-First, run the development server:
+AuraCast is a full-stack AI-powered media platform that helps creators extract iconic video frames, generate viral-ready captions, and compress media intelligently. Built with cutting-edge tools like Cloudinary and Gemini LLMs, AuraCast combines visual fidelity with AI automation to streamline content generation.
 
-```bash
+🔍 Core Features
+🧠 AI Caption + Hashtag Generator
+Uses Gemini 1.5 Flash to generate engaging captions & hashtags
+
+Context-aware: inputs include title, description, duration & even thumbnail
+
+Supports tone variations: Fun, Formal, SEO-Optimized, More Engaging, etc.
+
+🎞️ Keyframe Thumbnail Picker
+Powered by Cloudinary’s video transformation API
+
+Allows creators to scrub, seek, and extract precise thumbnails using an interactive slider
+
+Auto-generates high-resolution, shareable thumbnails
+
+📦 AI-Optimized Video Compression
+Lossless compression with real-time before/after stats
+
+Compression percentages shown clearly for each video
+
+Instantly downloadable compressed versions
+
+🖼️ Social Media Formatter for Images
+Format media for Twitter, LinkedIn, Instagram using Cloudinary transformations
+
+Auto-generate post text and hashtags using LLMs
+
+Download share-ready visuals for multiple platforms
+
+🗃️ Personalized Video Library
+Upload videos and manage a smart library with filters, hover previews, and metadata
+
+Each video includes captioning, keyframe control, and media stats (original vs. compressed size)
+
+⚙️ Tech Stack
+Layer	Tools / Libraries
+Frontend	Next.js (App Router), React, TailwindCSS, DaisyUI
+Backend API	Next.js Server Functions (app/api/), TypeScript
+AI/LLM	Gemini 1.5 Flash via Google AI API for captions, tags, refinement
+Cloud Media	Cloudinary for video hosting, thumbnail generation, compression
+UI Enhancements	Lucide Icons, Custom Modals, Responsive Layout
+State Mgmt	useState, useEffect, useRef — optimized per component
+Deployment	Vercel (or local dev with npm run dev)
+
+🔥 AI + Cloudinary Integration Highlights
+Feature	Cloudinary	Gemini (LLM)
+Keyframe Extraction	✅ Precise timestamp thumbnails via start_offset	
+Caption Generation	Contextual prompts: title, metadata, thumbnail	
+Hashtag Suggestions	Hashtags tuned per tone & platform	
+Compression	✅ Real-time video compression & size stats	
+Image Formatting	Auto-resize + preview for Twitter, LinkedIn, IG	
+
+🚀 Demo
+📹 Video Demo – Keyframe & Captioning
+
+🖼️ Video Demo – Social Media Image Tool
+
+🧪 Screenshots
+Video Library	Captioning	Thumbnail Picker
+
+💼 Why It Matters (for Recruiters)
+End-to-end AI integration using real LLM APIs (Gemini 1.5 Flash)
+
+Cloud-native media operations — no fake mocks; real Cloudinary usage
+
+Strong UI/UX thinking: clean design, clear controls, hover states, previews
+
+Built for creators, usable by marketers: emphasizes AI that serves storytelling
+
+Designed and implemented 100% independently as a solo full-stack engineer
+
+🧑‍💻 Run It Locally
+bash
+Copy
+Edit
+git clone https://github.com/your-username/auracast.git
+cd auracast
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+🌐 Environment Variables
+env
+Copy
+Edit
+NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME=your_cloud_name
+CLOUDINARY_API_KEY=your_api_key
+CLOUDINARY_API_SECRET=your_api_secret
+GEMINI_API_KEY=your_google_ai_key
+📫 Contact
+Built with care by Raghav Narayan
+🔗 Portfolio | ✉️ raghav.narayan.98@gmail.com
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
-
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
-=======
-# ai-cloudinary-saas
->>>>>>> 7589c2ad76d1f64f4e6bd1d16850e78293fc8d73
